@@ -18,13 +18,11 @@ public class Wallet : MonoBehaviour
 
     private void OnEnable()
     {
-        _levelGeneration.CoinFoundEvent += AddCoin;
+        _amountCoins.text = _amount.ToString();
     }
 
     private void OnDisable()
     {
-        _levelGeneration.CoinFoundEvent -= AddCoin;
-
         if (PlayerPrefs.HasKey("Coins"))
         {
             if (PlayerPrefs.GetInt("Coins") < _amount)
@@ -33,6 +31,6 @@ public class Wallet : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt("Coins", _amount);
-        }
+        }        
     }
 }

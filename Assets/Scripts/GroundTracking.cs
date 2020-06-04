@@ -33,8 +33,6 @@ public class GroundTracking : MonoBehaviour
     }
 
     public event UnityAction<Ground> TriggerEnterGroundEvent;
-    public event UnityAction TriggerExitGroundEvent;
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -48,9 +46,7 @@ public class GroundTracking : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Ground ground))
-        {
-            TriggerExitGroundEvent?.Invoke();
             CountGrounds--;
-        }
+        
     }
 }
