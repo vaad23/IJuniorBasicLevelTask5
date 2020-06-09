@@ -1,14 +1,41 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+[Serializable]
+public class Obstacle
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    [SerializeField] private ObstacleDamager _damager;
+
+    private GameObject _activeObject;
+
+    public enum Type
     {
-        if (collision.TryGetComponent(out Player player))
+        None = 0,
+        Damager = 1
+    }
+
+    public void Init(Type type)
+    {
+        if (_activeObject != null)
+            Disable();
+
+        switch (type)
         {
-            player.TakeDamage();
+            case Type.Damager:
+                _activeObject = _damager.gameObject;
+                _activeObject.SetActive(true);
+                break;
         }
+    }
+
+    public void Disable()
+    {
+        if (_activeObject == null)
+            return;
+
+        _activeObject.SetActive(false);
+        _activeObject = null;        
     }
 }

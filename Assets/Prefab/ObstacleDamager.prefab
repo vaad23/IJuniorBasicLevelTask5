@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4411845706045370569}
   - component: {fileID: 475226619302702420}
   - component: {fileID: 5349625081078506204}
-  - component: {fileID: 4094003400830463072}
+  - component: {fileID: -7049845206179122356}
   m_Layer: 0
-  m_Name: Obstacle
+  m_Name: ObstacleDamager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +108,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
---- !u!114 &4094003400830463072
+--- !u!114 &-7049845206179122356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,6 +117,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7895772121186952404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42d9250481b9554499f62903c3a0fa24, type: 3}
+  m_Script: {fileID: 11500000, guid: c304a83ac77e1b54498a5c8ceedc39cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

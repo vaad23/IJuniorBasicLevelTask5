@@ -3,31 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class LevelGeneration : MonoBehaviour
+public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] private Transform _spawn;
     [SerializeField] private Transform _spawnBorder;
-     [SerializeField] private Ground _prefab;
-    [SerializeField] private GroundTracking _onLeft;
+    [SerializeField] private Ground _template;
+    [SerializeField] private GroundTracking _destroyer;
 
     private List<Ground> _poolGrounds;
     private Ground _lastActive;
     
     private void OnEnable()
     {
-        _onLeft.TriggerEnterGroundEvent += OnTriggerEnterGround;
+        _destroyer.EnteredGround += OnEnteredGround;
     }
 
     private void OnDisable()
     {
-        _onLeft.TriggerEnterGroundEvent -= OnTriggerEnterGround;           
+        _destroyer.EnteredGround -= OnEnteredGround;           
     }
 
-    private void OnTriggerEnterGround(Ground ground)
+    private void OnEnteredGround(Ground ground)
     {
         _poolGrounds.Add(ground);
         ground.gameObject.SetActive(false);
-        EnableGrounds(false);
+        EnableGrounds(true);
     }
 
     private void Start()
@@ -39,17 +39,17 @@ public class LevelGeneration : MonoBehaviour
     {
         _poolGrounds = new List<Ground>();
 
-        EnableGrounds(true);
+        EnableGrounds(false);
     }
 
     private void CreateGround()
     {
-        Ground ground = Instantiate(_prefab, transform);
+        Ground ground = Instantiate(_template, transform);
         _poolGrounds.Add(ground);
         ground.gameObject.SetActive(false);
     }
 
-    private void EnableGrounds(bool defaultValue)
+    private void EnableGrounds(bool isBonusActivate)
     {
         while (_spawnBorder.transform.position.x > _spawn.position.x)
         {
@@ -62,7 +62,7 @@ public class LevelGeneration : MonoBehaviour
             ground.transform.position = _spawn.position;
             _spawn.position += new Vector3(1, 0);
 
-            if (!defaultValue)
+            if (isBonusActivate)
                 ground.Enable(_lastActive);
 
             _lastActive = ground;

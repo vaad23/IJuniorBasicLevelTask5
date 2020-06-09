@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Wallet : MonoBehaviour
 {
-    [SerializeField] private LevelGeneration _levelGeneration;
+    [SerializeField] private LevelGenerator _levelGeneration;
     [SerializeField] private Text _amountCoins;
 
     private int _amount;

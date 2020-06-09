@@ -23,10 +23,10 @@ public class Ground : MonoBehaviour
         }
         else
         {
-            if(_chanceCoin > chance)
+            if (_chanceCoin > chance)
                 _coin.gameObject.SetActive(true);
-            else if(_chanceCoin + _chanceObstacle > chance)
-                _obstacle.gameObject.SetActive(true);
+            else if (_chanceCoin + _chanceObstacle > chance)
+                _obstacle.Init(Obstacle.Type.Damager);
         }
     }
 
@@ -35,8 +35,6 @@ public class Ground : MonoBehaviour
         if (_coin.gameObject.activeSelf)
             _coin.gameObject.SetActive(false);
 
-        if (_obstacle.gameObject.activeSelf)
-            _obstacle.gameObject.SetActive(false);
-        
+        _obstacle.Disable();        
     }
 }

@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(_speed * Time.deltaTime, 0, 0);
 
         if (Input.GetKeyDown(KeyCode.Space))
-            if (_underfoot.IsGround)
+            if (_underfoot.CountGrounds != 0)
                 _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
 

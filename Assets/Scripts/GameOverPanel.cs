@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameOverPanel : MonoBehaviour
 {
-    public void Restert()
+    public void Restart()
     {
         SceneManager.LoadScene("Game");
     }

@@ -7,8 +7,7 @@ using UnityEngine.Events;
 public class GroundTracking : MonoBehaviour
 {
     private int _countGrounds;
-
-    public bool IsGround { get; private set; }
+    
     public int CountGrounds
     {
         get
@@ -18,27 +17,16 @@ public class GroundTracking : MonoBehaviour
         private set
         {
             _countGrounds = Mathf.Clamp(value, 0, int.MaxValue);
-
-            if (_countGrounds == 0)
-            {
-                if (IsGround)
-                    IsGround = false;
-            }
-            else
-            {
-                if (!IsGround)
-                    IsGround = true;
-            }
         }
     }
 
-    public event UnityAction<Ground> TriggerEnterGroundEvent;
+    public event UnityAction<Ground> EnteredGround;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Ground ground))
         {
-            TriggerEnterGroundEvent?.Invoke(ground);
+            EnteredGround?.Invoke(ground);
             CountGrounds++;
         }
     }
