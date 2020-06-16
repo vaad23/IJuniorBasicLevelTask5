@@ -6,27 +6,32 @@ using UnityEngine.Events;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Ground : MonoBehaviour
 {
-    [SerializeField] private int _chanceCoin;
-    [SerializeField] private int _chanceReCoin;
+    [SerializeField] private float _chanceCreateObject; 
+    [SerializeField] private float _significanceOfCoin;
+    [SerializeField] private float _chanceReCoin;
+    [SerializeField] private float _significanceOfObstacle;
     [SerializeField] private Coin _coin;
-    [SerializeField] private int _chanceObstacle;
     [SerializeField] private Obstacle _obstacle;
     
     public void Enable(Ground previous)
     {
-        int chance = Random.Range(0, 100);
-
         if (previous._coin.gameObject.activeSelf)
         {
-            if (_chanceReCoin > chance)
+            if (_chanceReCoin > Random.Range(0, 100))
                 _coin.gameObject.SetActive(true);
         }
         else
         {
-            if (_chanceCoin > chance)
-                _coin.gameObject.SetActive(true);
-            else if (_chanceCoin + _chanceObstacle > chance)
-                _obstacle.Init(Obstacle.Type.Damager);
+            if (_chanceCreateObject > Random.Range(0, 100))
+            {
+                float maxSignificance = _significanceOfCoin + _significanceOfObstacle;
+                float chance = Random.Range(0, maxSignificance);
+
+                if (_significanceOfCoin > chance)
+                    _coin.gameObject.SetActive(true);
+                else
+                    _obstacle.Init(Obstacle.Type.Damager);
+            }
         }
     }
 
